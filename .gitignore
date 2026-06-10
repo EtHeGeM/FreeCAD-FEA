@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.12d
+*.cvg
+*.sta
+spooles.out
+*.FCBak
+.DS_Store

@@ -1,0 +1,36 @@
+Extracted FEA values from CalculiX FRD/DAT
+FRD file: shaft_6061_fem_output/Gmsh_Mesh_3mm_8mm_corrected.frd
+Nodes with coordinates: 20655
+Nodes with displacement results: 4041
+Nodes with stress results: 4041
+
+Maximum displacement:
+  node = 113
+  coordinate = [600.0, 21.2132, -21.2132] mm
+  ux, uy, uz, |u| = (1.85144, -15.4793, 15.9757, 22.32172818250415)
+
+Maximum Von Mises stress:
+  node = 790
+  coordinate = [28.4394, 18.422, -23.6776] mm
+  Sxx, Syy, Szz, Sxy, Syz, Szx, P1, P2, P3, VM, Tresca = (459.795, 14.309, 9.80453, 1.16286, 9.33353, -0.400591, 459.79835010183257, 21.65717744014841, 2.453002458019087, 448.05203633592635, 457.34534764381345)
+
+Maximum principal stress P1:
+  node = 90
+  coordinate = [0.0, 21.2132, -21.2132] mm
+  P1 = 640.057719861831
+
+Minimum principal stress P3:
+  node = 78
+  coordinate = [0.0, -21.2132, 21.2132] mm
+  P3 = -544.8534759152137
+
+Reaction output from DAT:
+S T E P       1
+
+
+                                INCREMENT     1
+
+
+ total force (fx,fy,fz) for set FIXED_END_X0 and time  0.1000000E+01
+
+       -1.000000E+05  1.000000E+04 -2.000000E+04

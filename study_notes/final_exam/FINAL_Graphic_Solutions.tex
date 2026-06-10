@@ -1,0 +1,299 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=18mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\newcommand{\MPa}{\mathrm{MPa}}
+\newcommand{\kN}{\mathrm{kN}}
+\newcommand{\mm}{\mathrm{mm}}
+\newcommand{\Nm}{\mathrm{N\,m}}
+
+\title{\textbf{MECT2222 Final Exercise Questions}\\Graphic Solution Notes}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{How to Use This Sheet}
+Every solution must start with a free-body diagram. The final exam question file contains vibration, buckling, combined loading, stress transformation, pressure vessel, and shear-flow/shear-stress problems. This document gives graphical solution routes, key formulas, and numeric results where the data are readable.
+
+\section{Vibration}
+
+\subsection*{22-56 Forced Undamped Vibration}
+Given \(m=40\,\mathrm{kg}\), \(k=800\,\mathrm{N/m}\), \(F=100\cos(2t)\,\mathrm{N}\).
+\[
+\omega_n=\sqrt{k/m}=4.472\ \mathrm{rad/s}
+\]
+\[
+X={F_0\over |k-m\omega^2|}={100\over |800-40(2)^2|}=0.15625\ \mathrm{m}
+\]
+\[
+v_{\max}=\omega X=2(0.15625)=0.3125\ \mathrm{m/s}
+\]
+\begin{center}
+\includegraphics[width=0.85\textwidth]{final_graphic_solutions/22-56_response.png}
+\end{center}
+
+\subsection*{22-42 General Forced Response}
+\[
+mx''+kx=F_0\cos\omega t
+\qquad\Rightarrow\qquad
+x''+{k\over m}x={F_0\over m}\cos\omega t
+\]
+For \(\omega\ne\omega_n\),
+\[
+x=C_1\cos\omega_n t+C_2\sin\omega_n t+
+{F_0\over k-m\omega^2}\cos\omega t
+\]
+
+\subsection*{22-37 Slender Rod With Two Springs}
+For small rotation \(\theta\), spring-point displacement is \(x=2\theta\). Restoring moment:
+\[
+M_s=2k(2\theta)(2)=8k\theta
+\]
+\[
+I_O={1\over3}mL^2={1\over3}(6)(4^2)=32\ \mathrm{kg\,m^2}
+\]
+\[
+\omega_n=\sqrt{{8k\over I_O}}=\sqrt{{1600\over32}}=7.071\ \mathrm{rad/s}
+\]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{final_graphic_solutions/22-37_restoring_moment.png}
+\end{center}
+
+\subsection*{22-36, 22-23, 22-15}
+\[
+22\text{-}36:\quad k_{eq}=4k,\qquad T_n=2\pi\sqrt{m\over4k}
+\]
+\[
+22\text{-}23:\quad \omega_n=\sqrt{4k\over m}=5.657\ \mathrm{rad/s},\qquad T_n=1.111\ \mathrm{s}
+\]
+\[
+22\text{-}15:\quad \omega_n=\sqrt{3k\over m},\qquad T_n=2\pi\sqrt{m\over3k}
+\]
+
+\section{Buckling}
+
+\subsection*{13-40}
+At joint \(A\), member \(AC\) is a two-force member with 3-4-5 geometry. For \(P=18\,\kN\),
+\[
+F_{AC}{3\over5}=P,\qquad F_{AC}={5P\over3}
+\]
+Compression in \(AB\):
+\[
+F_{AB}=F_{AC}{4\over5}={4P\over3}=24\,\kN
+\]
+Buckling check:
+\[
+P_{cr}={\pi^2EI_y\over(KL)^2},\qquad FS={P_{cr}\over F_{AB}}
+\]
+Use \(K=1\) for pin-pin buckling.
+
+\subsection*{13-34 and 13-13}
+For frame/deck buckling questions:
+\[
+P_{allow}={P_{cr}\over FS},\qquad
+P_{cr}={\pi^2EI_{min}\over(KL)^2}
+\]
+Draw the beam/deck FBD first, find column reactions, then compare each reaction with the relevant column buckling load.
+
+\section{Shafts and Combined Loading}
+
+\subsection*{R11-3, R11-4, 11-43}
+Use two-plane shaft statics:
+\[
+M_R=\sqrt{M_x^2+M_z^2},\qquad T=F_t r
+\]
+Solid circular shaft:
+\[
+\sigma={32M_R\over\pi d^3},\qquad
+\tau={16T\over\pi d^3}
+\]
+Von Mises:
+\[
+\sigma_{VM}=\sqrt{\sigma^2+3\tau^2}
+\]
+Tresca / maximum shear:
+\[
+\tau_{\max}=\sqrt{\left({\sigma\over2}\right)^2+\tau^2}
+\]
+
+\subsection*{10-87 Pure Torsion, A-36 Steel}
+For pure torsion with maximum distortion energy:
+\[
+\sigma_{VM}=\sqrt{3}\tau,\qquad
+\tau_{allow}={S_y\over \sqrt{3}FS}
+\]
+\[
+\tau={Tc\over J},\qquad
+J_s={\pi d^4\over32},\qquad
+J_h={\pi(d_o^4-d_i^4)\over32}
+\]
+The allowable torque is the smaller value from the solid and hollow segments.
+
+\section{Stress Transformation and Failure}
+
+\subsection*{10-73 and 10-74}
+For \(\sigma_x=560\,\MPa\), \(\sigma_y=0\), \(\tau_{xy}=175\,\MPa\):
+\[
+\sigma_{avg}={\sigma_x+\sigma_y\over2},\qquad
+R=\sqrt{\left({\sigma_x-\sigma_y\over2}\right)^2+\tau_{xy}^2}
+\]
+\[
+\sigma_{1,2}=\sigma_{avg}\pm R
+\]
+Maximum shear theory:
+\[
+S_y\ge\sigma_1-\sigma_2=2R
+\]
+Distortion energy:
+\[
+S_y\ge\sqrt{\sigma_x^2-\sigma_x\sigma_y+\sigma_y^2+3\tau_{xy}^2}
+\]
+
+\subsection*{10-69 Concrete Cylinder}
+\[
+\sigma=-{P\over A}=-1.019\,\MPa,\qquad
+\tau={Tc\over J}=20.372\,\MPa
+\]
+\[
+\sigma_1=19.869\,\MPa,\qquad \sigma_2=-20.887\,\MPa
+\]
+Since \(20.887<28\,\MPa\), it does not fail by maximum normal stress theory.
+\begin{center}
+\includegraphics[width=0.65\textwidth]{final_graphic_solutions/10-69_mohr.png}
+\end{center}
+
+\subsection*{10-58 Constrained Material}
+\[
+{E_{app}\over E}={1-\nu\over(1+\nu)(1-2\nu)}
+\]
+For \(\nu=0.3\):
+\[
+{E_{app}\over E}={0.7\over1.3(0.4)}=1.346
+\]
+
+\subsection*{10-56 and 10-57 Pressure Vessel}
+\[
+\sigma_h={pr\over t},\qquad \sigma_l={pr\over2t}
+\]
+\[
+\epsilon_h={\sigma_h-\nu\sigma_l\over E},\qquad
+\epsilon_l={\sigma_l-\nu\sigma_h\over E}
+\]
+For \(p=15\,\MPa\), \(r=0.5\,\mathrm{m}\), \(t=10\,\mm\), \(E=200\,\mathrm{GPa}\), \(\nu=0.3\):
+\[
+\sigma_h=750\,\MPa,\quad \sigma_l=375\,\MPa
+\]
+\[
+\epsilon_h=0.0031875,\qquad \epsilon_l=0.000750
+\]
+\[
+\Delta D=3.1875\,\mm,\qquad \Delta L=2.25\,\mm
+\]
+\[
+{\Delta V\over V}\approx2\epsilon_h+\epsilon_l=0.007125,\qquad
+\Delta V=0.0168\,\mathrm{m^3}
+\]
+\begin{center}
+\includegraphics[width=0.85\textwidth]{final_graphic_solutions/10-56_pressure_vessel.png}
+\end{center}
+
+\section{Mohr Circle Examples}
+
+\subsection*{9-63 Helicopter Rotor Shaft}
+Given \(d=150\,\mm\), \(P=225\,\kN\), \(T=15\,\kN\mathrm{m}\):
+\[
+\sigma={P\over A}=12.732\,\MPa,\qquad
+\tau={Tc\over J}=22.635\,\MPa
+\]
+\[
+\sigma_1=29.880\,\MPa,\quad
+\sigma_2=-17.147\,\MPa,\quad
+\tau_{\max}=23.514\,\MPa
+\]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{final_graphic_solutions/9-63_mohr.png}
+\end{center}
+
+\subsection*{9-38, 9-39, 9-85, 9-34, 9-35, 9-30}
+General section stress workflow:
+\[
+\sigma_x={N\over A}\pm{Mc\over I}
+\]
+\[
+\tau={Tc\over J}+{VQ\over It}
+\]
+Then apply:
+\[
+\sigma_{1,2}={\sigma_x+\sigma_y\over2}\pm
+\sqrt{\left({\sigma_x-\sigma_y\over2}\right)^2+\tau_{xy}^2}
+\]
+
+\section{Shear Stress Problems}
+
+\subsection*{7-26}
+For the simply supported beam:
+\[
+R_A={5P\over3},\qquad R_B={4P\over3}
+\]
+\[
+V_{\max}={5P\over3}
+\]
+Rectangular cross section \(b=50\,\mm\), \(d=100\,\mm\):
+\[
+\tau_{\max}=1.5{V\over A}
+\]
+\[
+3=1.5{(5P/3)\over5000}\qquad\Rightarrow\qquad P_{\max}=6000\,\mathrm{N}=6.0\,\kN
+\]
+\begin{center}
+\includegraphics[width=0.85\textwidth]{final_graphic_solutions/7-26_shear_moment.png}
+\end{center}
+
+\subsection*{7-25}
+Cantilever rectangular beam:
+\[
+\sigma_{\max}={PL(h/2)\over bh^3/12}={6PL\over bh^2}
+\]
+\[
+\tau_{\max}=1.5{P\over bh}
+\]
+Set \(\sigma_{\max}=\tau_{\max}\):
+\[
+L={h\over4}
+\]
+
+\subsection*{7-22}
+Use:
+\[
+\tau={VQ\over It}
+\]
+Compute \(Q\) at points \(A\) and \(B\) using the area above or below the point in the web.
+
+\subsection*{7-18 Circular Rod}
+\[
+\tau(y)={4V\over3A}\left(1-{y^2\over c^2}\right)
+\]
+\[
+{\tau_{\max}\over\tau_{avg}}={4/3}
+\]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{final_graphic_solutions/7-18_shear_distribution.png}
+\end{center}
+
+\section*{Exam Drawing Checklist}
+\begin{enumerate}
+\item Draw the global FBD.
+\item Draw support reactions and load components.
+\item Cut the member at the requested section.
+\item Draw \(N,V,M,T\) at the cut.
+\item Draw stress element at the requested point.
+\item Draw Mohr circle if principal stress or maximum shear is requested.
+\item Compare with failure criterion when allowable/yield/ultimate stress is given.
+\end{enumerate}
+
+\end{document}
