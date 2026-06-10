@@ -1,0 +1,708 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=18mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\newcommand{\MPa}{\mathrm{MPa}}
+\newcommand{\kN}{\mathrm{kN}}
+\newcommand{\mm}{\mathrm{mm}}
+\newcommand{\m}{\mathrm{m}}
+\newcommand{\Nm}{\mathrm{N\,m}}
+
+\title{\textbf{MECT2222 Final Exercise Questions}\\Step-by-Step Graphic Solutions}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Not}
+Bu dosya önceki grafik özetin genişletilmiş halidir. Her soru için beklenen sınav formatı şudur:
+\[
+\boxed{\text{FBD} \rightarrow \text{denge / hareket denklemi} \rightarrow \text{iç kuvvetler} \rightarrow \text{gerilme / titreşim / burkulma denklemi} \rightarrow \text{sonuç}}
+\]
+PDF'deki bazı küçük ölçüler görüntüden net okunmadığı için bazı problemlerde sayısal sonuç yerine tam çözüm akışı verilmiştir.
+
+\section{Titreşim Soruları}
+
+\subsection*{22-56: Zorlanmış titreşimde maksimum hız}
+\textbf{Adım 1 - FBD:} Kütleye yay kuvveti, atalet kuvveti ve harmonik dış kuvvet etkir.
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{final_step_drawings/22-56_fbd.png}
+\end{center}
+
+\textbf{Adım 2 - Hareket denklemi:}
+\[
+mx''+kx=F_0\cos\omega t
+\]
+\[
+40x''+800x=100\cos(2t)
+\]
+
+\textbf{Adım 3 - Doğal frekans:}
+\[
+\omega_n=\sqrt{k/m}=\sqrt{800/40}=4.472\ \mathrm{rad/s}
+\]
+
+\textbf{Adım 4 - Sönümsüz kararlı hal genliği:}
+\[
+X={F_0\over |k-m\omega^2|}
+={100\over |800-40(2)^2|}
+={100\over640}=0.15625\ \m
+\]
+
+\textbf{Adım 5 - Maksimum hız:}
+\[
+x_{ss}=X\cos(2t)
+\]
+\[
+v_{ss}=-2X\sin(2t)
+\]
+\[
+\boxed{v_{\max}=2X=0.3125\ \mathrm{m/s}}
+\]
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{final_graphic_solutions/22-56_response.png}
+\end{center}
+
+\subsection*{22-42: Genel çözüm}
+\textbf{Adım 1 - FBD:} Sağa pozitif \(x\). Yay geri çağırıcı kuvveti sola \(kx\), dış kuvvet sağa \(F_0\cos\omega t\).
+
+\textbf{Adım 2 - Newton denklemi:}
+\[
+\sum F_x=mx''
+\]
+\[
+F_0\cos\omega t-kx=mx''
+\]
+\[
+\boxed{x''+{k\over m}x={F_0\over m}\cos\omega t}
+\]
+
+\textbf{Adım 3 - Homojen çözüm:}
+\[
+x_h=C_1\cos\omega_n t+C_2\sin\omega_n t,\qquad \omega_n=\sqrt{k/m}
+\]
+
+\textbf{Adım 4 - Özel çözüm:}
+\[
+x_p=A\cos\omega t
+\]
+\[
+(-A\omega^2)+{k\over m}A={F_0\over m}
+\]
+\[
+A={F_0\over k-m\omega^2}
+\]
+
+\textbf{Sonuç:}
+\[
+\boxed{x=C_1\cos\omega_n t+C_2\sin\omega_n t+
+{F_0\over k-m\omega^2}\cos\omega t}
+\]
+
+\subsection*{22-37: Yaylı ince çubuk}
+\textbf{Adım 1 - Küçük dönme FBD:}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{final_step_drawings/22-37_fbd.png}
+\end{center}
+
+\textbf{Adım 2 - Kinematik:} Yayların bağlandığı nokta pimden 2 m aşağıdadır.
+\[
+x=2\theta
+\]
+
+\textbf{Adım 3 - Yay kuvvetleri:}
+\[
+F_s=kx=200(2\theta)=400\theta
+\]
+İki yay olduğu için toplam yatay geri çağırıcı kuvvet:
+\[
+2F_s=800\theta
+\]
+
+\textbf{Adım 4 - Geri çağırıcı moment:}
+\[
+M_s=(2F_s)(2)=1600\theta=8k\theta
+\]
+
+\textbf{Adım 5 - Atalet momenti:}
+\[
+I_O={1\over3}mL^2={1\over3}(6)(4^2)=32\ \mathrm{kg\,m^2}
+\]
+
+\textbf{Adım 6 - Hareket denklemi:}
+\[
+I_O\theta''+8k\theta=0
+\]
+\[
+\omega_n=\sqrt{8k/I_O}=\sqrt{1600/32}
+\]
+\[
+\boxed{\omega_n=7.071\ \mathrm{rad/s}}
+\]
+
+\subsection*{22-36: Makine dört yay üzerinde}
+\textbf{Adım 1 - FBD:} Makine kütlesi \(m\), dört yay paralel bağlıdır. Paralel yaylarda rijitlik toplanır.
+\[
+k_{eq}=k+k+k+k=4k
+\]
+
+\textbf{Adım 2 - Hareket denklemi:}
+\[
+mx''+4kx=0
+\]
+
+\textbf{Adım 3 - Doğal periyot:}
+\[
+\omega_n=\sqrt{4k/m}
+\]
+\[
+\boxed{T_n={2\pi\over\omega_n}=2\pi\sqrt{m\over4k}}
+\]
+
+\subsection*{22-23: Yaylı disk}
+\textbf{Adım 1 - FBD:} Disk merkezden pimli, iki yay kordona bağlıdır. Kayma yoktur.
+
+\begin{center}
+\includegraphics[width=0.65\textwidth]{final_step_drawings/22-23_fbd.png}
+\end{center}
+
+\textbf{Adım 2 - Kinematik:}
+\[
+x=r\theta
+\]
+
+\textbf{Adım 3 - Yay momenti:}
+\[
+M_s=2(kx)r=2kr^2\theta
+\]
+
+\textbf{Adım 4 - Disk atalet momenti:}
+\[
+I_O={1\over2}mr^2
+\]
+
+\textbf{Adım 5 - Hareket denklemi:}
+\[
+I_O\theta''+2kr^2\theta=0
+\]
+\[
+\omega_n=\sqrt{{2kr^2\over I_O}}=\sqrt{4k/m}
+\]
+\[
+\omega_n=\sqrt{4(80)/10}=5.657\ \mathrm{rad/s}
+\]
+\[
+\boxed{T_n={2\pi\over\omega_n}=1.111\ \mathrm{s}}
+\]
+
+\subsection*{22-15: Merkezden pimli çubuk}
+\textbf{Adım 1 - Kinematik:}
+\[
+x={L\over2}\theta
+\]
+
+\textbf{Adım 2 - Yay momenti:}
+\[
+M_s=k\left({L\over2}\theta\right)\left({L\over2}\right)
+={kL^2\over4}\theta
+\]
+
+\textbf{Adım 3 - Çubuk atalet momenti:}
+\[
+I_O={mL^2\over12}
+\]
+
+\textbf{Adım 4 - Doğal frekans:}
+\[
+\omega_n=\sqrt{(kL^2/4)/(mL^2/12)}
+\]
+\[
+\boxed{\omega_n=\sqrt{3k/m}},\qquad
+\boxed{T_n=2\pi\sqrt{m\over3k}}
+\]
+
+\section{Burkulma Soruları}
+
+\subsection*{13-40: Çerçevedeki AB elemanının burkulması}
+\textbf{Adım 1 - A noktasının FBD'si:} A noktasında \(P=18\,\kN\), AB düşey iki-kuvvet elemanı, AC ise 3-4-5 eğik iki-kuvvet elemanıdır.
+
+\textbf{Adım 2 - AC kuvvetini bul:}
+\[
+F_{AC}{3\over5}=P
+\]
+\[
+F_{AC}={5P\over3}={5(18)\over3}=30\,\kN
+\]
+
+\textbf{Adım 3 - AB basınç kuvveti:}
+\[
+F_{AB}=F_{AC}{4\over5}=30{4\over5}=24\,\kN
+\]
+
+\textbf{Adım 4 - Burkulma yükü:}
+\[
+P_{cr}={\pi^2EI_y\over(KL)^2}
+\]
+Pin-pin için \(K=1\). Kesitten \(I_y\) alınır.
+
+\textbf{Adım 5 - Emniyet katsayısı:}
+\[
+\boxed{FS={P_{cr}\over24\,\kN}}
+\]
+
+\subsection*{13-34: Dağıtılmış yüklü kiriş ve kolon burkulması}
+\textbf{Adım 1 - BC kiriş FBD:} \(w\) yükü 5 m boyunca etkir. Toplam yük \(W=5w\), orta noktadadır.
+
+\textbf{Adım 2 - B reaksiyonunu bul:}
+\[
+\sum M_C=0\Rightarrow R_B(5)-5w(2.5)=0
+\]
+\[
+R_B=2.5w
+\]
+
+\textbf{Adım 3 - AB kolon basıncı:}
+\[
+P_{AB}=R_B=2.5w
+\]
+
+\textbf{Adım 4 - Burkulma izin yükü:}
+\[
+P_{allow}={P_{cr}\over FS},\qquad FS=1.5
+\]
+\[
+P_{cr}={\pi^2EI_{min}\over L^2}
+\]
+
+\textbf{Adım 5 - \(w\) için çöz:}
+\[
+2.5w\le {P_{cr}\over1.5}
+\]
+\[
+\boxed{w_{max}={P_{cr}\over3.75}}
+\]
+
+\subsection*{13-13: İki kolonlu deck}
+\textbf{Adım 1 - Deck FBD:} Toplam yük \(P\), ağırlık merkezi \(G\), kolon reaksiyonları \(R_A\) ve \(R_C\).
+
+\textbf{Adım 2 - Kolon kritik yükleri:}
+\[
+P_{cr,AB}={\pi^2EI\over(K_{AB}L)^2}
+\]
+\[
+P_{cr,CD}={\pi^2EI\over(K_{CD}L)^2}
+\]
+
+\textbf{Adım 3 - En büyük yük için aynı anda kritik olma koşulu:}
+\[
+{R_A\over P_{cr,AB}}={R_C\over P_{cr,CD}}
+\]
+
+\textbf{Adım 4 - Deck dengesi:}
+\[
+R_A+R_C=P
+\]
+\[
+\sum M=0
+\]
+Bu iki denklemden \(G\)'nin konumu ve maksimum \(P\) bulunur.
+
+\section{Şaft ve Birleşik Yükleme Soruları}
+
+\subsection*{Genel şaft kesiti çözüm şablonu}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{final_step_drawings/shaft_section_template.png}
+\end{center}
+
+\textbf{Adım 1 - Mil FBD:} Dişli kuvvetlerini bileşenlerine ayır. Rulman reaksiyonlarını iki düzlemde bul.
+
+\textbf{Adım 2 - Moment diyagramları:}
+\[
+M_R=\sqrt{M_x^2+M_z^2}
+\]
+
+\textbf{Adım 3 - Gerilmeler:}
+\[
+\sigma={Mc\over I}={32M\over\pi d^3}
+\]
+\[
+\tau={Tc\over J}={16T\over\pi d^3}
+\]
+
+\textbf{Adım 4 - Failure theory:}
+\[
+\sigma_{VM}=\sqrt{\sigma^2+3\tau^2}
+\]
+\[
+\tau_{max}=\sqrt{\left({\sigma\over2}\right)^2+\tau^2}
+\]
+
+\subsection*{R11-3: Maksimum shear stress theory ile çap}
+\textbf{Adım 1:} FBD çiz; A ve B rulmanları yalnız \(x,z\) reaksiyonu verir.
+
+\textbf{Adım 2:} \(F_x=5\,\kN\) ve \(F_z=7.5\,\kN\) yükleri için iki ayrı düzlemde reaksiyonları çöz.
+
+\textbf{Adım 3:} Kritik kesitte \(M_x\), \(M_z\), \(T\) bul.
+
+\textbf{Adım 4:}
+\[
+M_R=\sqrt{M_x^2+M_z^2}
+\]
+
+\textbf{Adım 5:} Tresca koşulu:
+\[
+\sqrt{\left({16M_R\over\pi d^3}\right)^2+
+\left({16T\over\pi d^3}\right)^2}\le \tau_{allow}
+\]
+\[
+\boxed{d=\left[{16\over\pi\tau_{allow}}\sqrt{M_R^2+T^2}\right]^{1/3}}
+\]
+
+\subsection*{R11-4 ve 11-43: Von Mises ile çap}
+\textbf{Adım 1:} Rulman reaksiyonlarını bul.
+
+\textbf{Adım 2:} Dişli kuvvetlerinden torku bul:
+\[
+T=F_t r
+\]
+
+\textbf{Adım 3:} Kritik kesitte \(M_R\) ve \(T\) kullan:
+\[
+\sigma_{VM}=\sqrt{\left({32M_R\over\pi d^3}\right)^2+
+3\left({16T\over\pi d^3}\right)^2}
+\]
+
+\textbf{Adım 4:}
+\[
+\boxed{d=\left[
+{1\over\pi\sigma_{allow}}
+\sqrt{(32M_R)^2+3(16T)^2}
+\right]^{1/3}}
+\]
+
+\section{Gerilme Dönüşümü ve Mohr Çemberi}
+
+\subsection*{Mohr çemberi çizim şablonu}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{final_step_drawings/mohr_template.png}
+\end{center}
+
+\textbf{Her Mohr sorusunda:}
+\[
+\sigma_{avg}={\sigma_x+\sigma_y\over2}
+\]
+\[
+R=\sqrt{\left({\sigma_x-\sigma_y\over2}\right)^2+\tau_{xy}^2}
+\]
+\[
+\sigma_1=\sigma_{avg}+R,\qquad \sigma_2=\sigma_{avg}-R
+\]
+\[
+\tau_{max}=R
+\]
+
+\subsection*{10-73 ve 10-74}
+Şekilden:
+\[
+\sigma_x=560\,\MPa,\qquad \sigma_y=0,\qquad \tau_{xy}=175\,\MPa
+\]
+
+\textbf{Adım 1 - Ortalama ve yarıçap:}
+\[
+\sigma_{avg}=280\,\MPa
+\]
+\[
+R=\sqrt{280^2+175^2}=330.14\,\MPa
+\]
+
+\textbf{Adım 2 - Principal gerilmeler:}
+\[
+\sigma_1=610.14\,\MPa,\qquad \sigma_2=-50.14\,\MPa
+\]
+
+\textbf{10-73 Tresca:}
+\[
+S_y\ge \sigma_1-\sigma_2=660.28\,\MPa
+\]
+\[
+\boxed{S_y\approx 661\,\MPa}
+\]
+
+\textbf{10-74 Von Mises:}
+\[
+\sigma_{VM}=\sqrt{\sigma_x^2-\sigma_x\sigma_y+\sigma_y^2+3\tau_{xy}^2}
+\]
+\[
+\sigma_{VM}=\sqrt{560^2+3(175)^2}=637.17\,\MPa
+\]
+\[
+\boxed{S_y\approx 638\,\MPa}
+\]
+
+\subsection*{10-69: Beton silindir}
+\textbf{Adım 1 - Kesit özellikleri:}
+\[
+d=50\,\mm,\quad A={\pi d^2\over4},\quad J={\pi d^4\over32}
+\]
+
+\textbf{Adım 2 - Gerilmeler:}
+\[
+\sigma=-{P\over A}=-1.019\,\MPa
+\]
+\[
+\tau={Tc\over J}=20.372\,\MPa
+\]
+
+\textbf{Adım 3 - Principal gerilmeler:}
+\[
+\sigma_{avg}=-0.5095\,\MPa
+\]
+\[
+R=\sqrt{(-0.5095)^2+20.372^2}=20.378\,\MPa
+\]
+\[
+\sigma_1=19.869\,\MPa,\qquad \sigma_2=-20.887\,\MPa
+\]
+
+\textbf{Adım 4 - Maksimum normal stress theory:}
+\[
+\max |\sigma_i|=20.887\,\MPa<28\,\MPa
+\]
+\[
+\boxed{\text{Fail olmaz.}}
+\]
+
+\begin{center}
+\includegraphics[width=0.58\textwidth]{final_graphic_solutions/10-69_mohr.png}
+\end{center}
+
+\subsection*{10-58: Yan genleşmesi engellenen malzeme}
+\[
+\epsilon_x=\epsilon_y=0
+\]
+\[
+\epsilon_z={\sigma_z\over E}{(1+\nu)(1-2\nu)\over(1-\nu)}
+\]
+Bu nedenle görünen elastisite modülü:
+\[
+E_{app}={\sigma_z\over\epsilon_z}
+=E{1-\nu\over(1+\nu)(1-2\nu)}
+\]
+\[
+{E_{app}\over E}={0.7\over1.3(0.4)}=1.346
+\]
+\[
+\boxed{\text{Rijitlik }1.346\text{ kat artar.}}
+\]
+
+\subsection*{10-56 ve 10-57: İnce cidarlı basınçlı kap}
+\textbf{Adım 1 - Gerilmeler:}
+\[
+\sigma_h={pr\over t}={15(10^6)(0.5)\over0.01}=750\,\MPa
+\]
+\[
+\sigma_l={pr\over2t}=375\,\MPa
+\]
+
+\textbf{Adım 2 - Strainler:}
+\[
+\epsilon_h={\sigma_h-\nu\sigma_l\over E}
+={750-0.3(375)\over200000}=0.0031875
+\]
+\[
+\epsilon_l={\sigma_l-\nu\sigma_h\over E}
+={375-0.3(750)\over200000}=0.000750
+\]
+
+\textbf{Adım 3 - Çap ve boy artışı:}
+\[
+\Delta D=\epsilon_hD=0.0031875(1000)=3.1875\,\mm
+\]
+\[
+\Delta L=\epsilon_lL=0.000750(3000)=2.25\,\mm
+\]
+
+\textbf{Adım 4 - Hacim artışı:}
+\[
+{\Delta V\over V}\approx2\epsilon_h+\epsilon_l=0.007125
+\]
+\[
+V=\pi r^2L=\pi(0.5)^2(3)=2.356\,\m^3
+\]
+\[
+\Delta V=0.007125(2.356)=0.0168\,\m^3
+\]
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{final_graphic_solutions/10-56_pressure_vessel.png}
+\end{center}
+
+\section{Örnek Birleşik Gerilme Çözümleri}
+
+\subsection*{9-63: Helikopter rotor şaftı}
+\[
+d=150\,\mm,\quad P=225\,\kN,\quad T=15\,\kN\m
+\]
+
+\textbf{Adım 1 - Normal gerilme:}
+\[
+A={\pi d^2\over4}=17671.5\,\mm^2
+\]
+\[
+\sigma={P\over A}={225000\over17671.5}=12.732\,\MPa
+\]
+
+\textbf{Adım 2 - Torsiyon gerilmesi:}
+\[
+J={\pi d^4\over32}
+\]
+\[
+\tau={Tc\over J}=22.635\,\MPa
+\]
+
+\textbf{Adım 3 - Mohr:}
+\[
+\sigma_{avg}=6.366\,\MPa
+\]
+\[
+R=\sqrt{6.366^2+22.635^2}=23.514\,\MPa
+\]
+\[
+\boxed{\sigma_1=29.880\,\MPa}
+\]
+\[
+\boxed{\sigma_2=-17.147\,\MPa}
+\]
+\[
+\boxed{\tau_{max}=23.514\,\MPa}
+\]
+
+\begin{center}
+\includegraphics[width=0.58\textwidth]{final_graphic_solutions/9-63_mohr.png}
+\end{center}
+
+\subsection*{9-38, 9-39, 9-85: Şaft üzerinde A/B noktaları}
+\textbf{Adım 1:} Kesiti seç, sol veya sağ parçanın FBD'sini çiz.
+
+\textbf{Adım 2:} İç yükleri bul:
+\[
+V,\quad M,\quad T
+\]
+
+\textbf{Adım 3:} Nokta yüzeyde ise dairesel kesitte transverse shear sıfırdır:
+\[
+\tau_V=0\quad \text{(outer surface)}
+\]
+
+\textbf{Adım 4:} Gerilmeler:
+\[
+\sigma={Mc\over I}
+\]
+\[
+\tau={Tc\over J}
+\]
+
+\textbf{Adım 5:} Mohr çemberi ile \(\sigma_1,\sigma_2,\tau_{max}\) hesapla.
+
+\section{Kesme Gerilmesi Soruları}
+
+\subsection*{7-26: Maksimum P}
+\textbf{Adım 1 - FBD:}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{final_step_drawings/7-26_fbd.png}
+\end{center}
+
+\textbf{Adım 2 - Reaksiyonlar:}
+\[
+\sum M_A=0:\quad R_B(1.8)-P(0.6)-2P(1.2)=0
+\]
+\[
+R_B={3P\over1.8}={5P\over3}
+\]
+Kuvvet dengesiyle:
+\[
+R_A+R_B=3P
+\]
+Doğru reaksiyonlar:
+\[
+R_A={4P\over3},\qquad R_B={5P\over3}
+\]
+
+\textbf{Adım 3 - Maksimum shear:}
+\[
+V_{max}=R_B={5P\over3}
+\]
+
+\textbf{Adım 4 - Dikdörtgen kesitte maksimum shear:}
+\[
+\tau_{max}=1.5{V\over A}
+\]
+\[
+A=50(100)=5000\,\mm^2
+\]
+
+\textbf{Adım 5 - Emniyet koşulu:}
+\[
+3=1.5{(5P/3)\over5000}
+\]
+\[
+\boxed{P_{max}=6000\,\mathrm{N}=6.0\,\kN}
+\]
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{final_graphic_solutions/7-26_shear_moment.png}
+\end{center}
+
+\subsection*{7-25: Bending stress = shear stress}
+\[
+\sigma_{max}={Mc\over I}
+={PL(h/2)\over bh^3/12}
+={6PL\over bh^2}
+\]
+\[
+\tau_{max}=1.5{P\over bh}
+\]
+\[
+\sigma_{max}=\tau_{max}
+\]
+\[
+{6PL\over bh^2}={1.5P\over bh}
+\]
+\[
+\boxed{L={h\over4}}
+\]
+
+\subsection*{7-18: Dairesel kesitte shear dağılımı}
+\[
+\tau(y)={4V\over3A}\left(1-{y^2\over c^2}\right)
+\]
+\[
+\tau_{max}={4V\over3A},\qquad \tau_{avg}={V\over A}
+\]
+\[
+\boxed{{\tau_{max}\over\tau_{avg}}={4\over3}}
+\]
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{final_graphic_solutions/7-18_shear_distribution.png}
+\end{center}
+
+\section{Sınavda Her Soru İçin Çizim Sırası}
+\begin{enumerate}
+\item Global FBD: mesnetler, yükler, koordinat eksenleri.
+\item İç kesit FBD: \(N,V,M,T\).
+\item Gerekirse shear-force ve bending-moment diyagramı.
+\item Kesit çizimi: noktanın yeri, \(c\), \(I\), \(J\), \(Q\).
+\item Gerilme elemanı: \(\sigma\), \(\tau\) yönleri.
+\item Mohr çemberi: principal stresses ve max shear.
+\item Failure theory veya allowable stress kontrolü.
+\end{enumerate}
+
+\end{document}

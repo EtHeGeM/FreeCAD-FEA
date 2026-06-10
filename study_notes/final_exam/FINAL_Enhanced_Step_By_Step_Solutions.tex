@@ -1,0 +1,676 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=15mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{MECT2222 Final Solutions}
+\rhead{Step-by-step}
+\cfoot{\thepage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\newcommand{\formulaBox}[2]{\fbox{\begin{minipage}{0.94\textwidth}\textbf{#1}\par #2\end{minipage}}}
+\begin{document}
+\begin{center}
+{\Large\bf MECT2222 Final Exercise Questions}\par
+{\large Original Visual + Step-by-Step Graphic Solutions}\par
+\end{center}
+\formulaBox{Universal exam template}{1. Draw global FBD. 2. Solve reactions. 3. Cut at requested section. 4. Find $N,V,M,T$. 5. Compute section properties. 6. Calculate $\sigma,\tau$. 7. Use Mohr circle or failure criterion.}
+\formulaBox{Core formulas}{
+$\sigma=N/A\pm Mc/I$, $\tau_T=Tc/J$, $\tau_V=VQ/(It)$, $\sigma_{1,2}=\sigma_{avg}\pm\sqrt{((\sigma_x-\sigma_y)/2)^2+\tau_{xy}^2}$, $P_{cr}=\pi^2EI/(KL)^2$, $\omega_n=\sqrt{k_{eq}/m}$.
+}
+\newpage
+\clearpage
+\section*{Problem 22-56: Forced vibration - maximum speed}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/22-56.png}
+
+\textbf{Step-by-step solution:}\par
+\textbf{Given:} $m=40\,\mathrm{kg}$, $k=800\,\mathrm{N/m}$, $F=100\cos(2t)\,\mathrm{N}$.
+\begin{enumerate}
+\item FBD: spring force $kx$ acts opposite displacement; harmonic force acts downward; use $x$ from static equilibrium.
+\item Equation: $mx''+kx=F_0\cos\omega t$.
+\item $\omega_n=\sqrt{k/m}=\sqrt{800/40}=4.472\,\mathrm{rad/s}$.
+\item Steady-state amplitude, for $\omega\neq\omega_n$:
+\[X={F_0\over |k-m\omega^2|}={100\over |800-40(2)^2|}=0.15625\,\mathrm{m}\]
+\item Velocity: $v=-\omega X\sin\omega t$.
+\[\boxed{v_{max}=\omega X=0.3125\,\mathrm{m/s}}\]
+\end{enumerate}
+\includegraphics[width=.75\textwidth]{final_step_drawings/22-56_fbd.png}
+\includegraphics[width=.85\textwidth]{final_graphic_solutions/22-56_response.png}
+\clearpage
+\section*{Problem 22-42: General forced vibration equation}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/22-42.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw FBD of the block measured from static equilibrium. Weight and static spring stretch cancel.
+\item Dynamic forces in $x$: applied force $F_0\cos\omega t$ and spring force $-kx$.
+\item Newton's second law:
+\[F_0\cos\omega t-kx=mx''\]
+\[\boxed{x''+{k\over m}x={F_0\over m}\cos\omega t}\]
+\item Homogeneous solution: $x_h=C_1\cos\omega_n t+C_2\sin\omega_n t$, $\omega_n=\sqrt{k/m}$.
+\item Try $x_p=A\cos\omega t$:
+\[A={F_0\over k-m\omega^2}\]
+\[\boxed{x=C_1\cos\omega_n t+C_2\sin\omega_n t+{F_0\over k-m\omega^2}\cos\omega t}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 22-37: Slender rod natural frequency}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/22-37.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Choose generalized coordinate $\theta$ about pin $O$.
+\item Spring attachment is $2\,\mathrm{m}$ from $O$, so $x=2\theta$.
+\item Each spring force is $kx=200(2\theta)=400\theta$.
+\item Two springs produce restoring moment about $O$:
+\[M_s=2(400\theta)(2)=1600\theta=8k\theta\]
+\item Rod inertia about end pin:
+\[I_O={1\over3}mL^2={1\over3}(6)(4^2)=32\,\mathrm{kg\,m^2}\]
+\item Equation: $I_O\theta''+1600\theta=0$.
+\[\boxed{\omega_n=\sqrt{1600/32}=7.071\,\mathrm{rad/s}}\]
+\end{enumerate}
+\includegraphics[width=.7\textwidth]{final_step_drawings/22-37_fbd.png}
+\clearpage
+\section*{Problem 22-36: Four-spring machine period}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/22-36.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Four equal springs support the rigid machine uniformly; vertical displacement of each spring is the same.
+\item Equivalent stiffness for parallel springs:
+\[k_{eq}=4k\]
+\item Equation about static equilibrium:
+\[mx''+4kx=0\]
+\item Natural frequency and period:
+\[\omega_n=\sqrt{4k/m}\]
+\[\boxed{T_n=2\pi\sqrt{m\over4k}}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 22-23: Pinned disk with two springs}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/22-23.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Use rotation $\theta$ as generalized coordinate.
+\item No slip: spring extension $x=r\theta$.
+\item Two spring forces create restoring torque:
+\[M_s=2(kx)r=2kr^2\theta\]
+\item Disk inertia: $I_O={1\over2}mr^2$.
+\item Equation:
+\[{1\over2}mr^2\theta''+2kr^2\theta=0\]
+\[\omega_n=\sqrt{4k/m}=\sqrt{4(80)/10}=5.657\,\mathrm{rad/s}\]
+\[\boxed{T_n=1.111\,\mathrm{s}}\]
+\end{enumerate}
+\includegraphics[width=.75\textwidth]{final_step_drawings/22-23_fbd.png}
+\clearpage
+\section*{Problem 22-15: Pinned uniform bar with spring}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/22-15.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Let bar rotate by small angle $\theta$ about center pin.
+\item Left end vertical displacement: $x=(L/2)\theta$.
+\item Spring force: $F_s=k(L/2)\theta$.
+\item Restoring moment:
+\[M_s=F_s(L/2)={kL^2\over4}\theta\]
+\item Bar inertia about center: $I_O=mL^2/12$.
+\item Equation: $I_O\theta''+(kL^2/4)\theta=0$.
+\[\boxed{\omega_n=\sqrt{3k/m}},\qquad \boxed{T_n=2\pi\sqrt{m/(3k)}}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 13-40: Frame member buckling factor of safety}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/13-40.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Isolate joint $A$. Member $AC$ is a two-force member with 3-4-5 geometry.
+\item Horizontal equilibrium: $F_{AC}(3/5)=P$.
+\[F_{AC}=5P/3=30\,\mathrm{kN}\]
+\item Vertical component compresses $AB$:
+\[P_{AB}=F_{AC}(4/5)=24\,\mathrm{kN}\]
+\item Compute weak-axis Euler load:
+\[P_{cr}={\pi^2EI_y\over(KL)^2},\quad K=1\ \text{pin-pin}\]
+\item Factor of safety:
+\[\boxed{FS={P_{cr}\over24\,\mathrm{kN}}}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 13-34: Maximum distributed load before column buckling}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/13-34.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw beam $BC$ FBD. Total distributed load $W=5w$ acts at midspan.
+\item Moment about $C$:
+\[R_B(5)-5w(2.5)=0\Rightarrow R_B=2.5w\]
+\item This reaction is axial compression in column $AB$.
+\item Column is pin-pin: $K=1$, $L=3\,\mathrm{m}$.
+\[P_{cr}={\pi^2EI_{min}\over L^2}\]
+\item Required safety factor $1.5$:
+\[2.5w\le {P_{cr}\over1.5}\]
+\[\boxed{w_{max}={P_{cr}\over3.75}}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 13-13: Deck supported by two columns}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/13-13.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw deck FBD with reactions $R_A$, $R_C$ and load resultant $P$ through $G$.
+\item Compute critical loads separately:
+\[P_{cr,AB}={\pi^2EI\over(K_{AB}L)^2},\qquad P_{cr,CD}={\pi^2EI\over(K_{CD}L)^2}\]
+\item For maximum total load, both columns should reach buckling together:
+\[{R_A\over P_{cr,AB}}={R_C\over P_{cr,CD}}\]
+\item Use deck statics:
+\[R_A+R_C=P,\qquad \sum M=0\]
+\item Solve these equations for the best load position $d$ and maximum $P$.
+\end{enumerate}
+\clearpage
+\section*{Problem R11-4: Shaft diameter by distortion-energy theory}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/R11-4.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw 3D shaft FBD. Bearings at $A$ and $B$ supply only $x$ and $z$ reactions.
+\item Resolve gear forces and solve statics in two planes.
+\item Draw $M_x(y)$ and $M_z(y)$ diagrams; combine:
+\[M_R=\sqrt{M_x^2+M_z^2}\]
+\item Gear torque: $T=F_t r$.
+\item Solid shaft stresses:
+\[\sigma={32M_R\over\pi d^3},\qquad \tau={16T\over\pi d^3}\]
+\item Von Mises condition:
+\[\boxed{\sqrt{\sigma^2+3\tau^2}\le 200\,\mathrm{MPa}}\]
+\item Solve for $d$ and round up to nearest millimeter.
+\end{enumerate}
+\includegraphics[width=.55\textwidth]{final_step_drawings/shaft_section_template.png}
+\clearpage
+\section*{Problem R11-3: Shaft diameter by maximum shear stress theory}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/R11-3.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Same shaft statics as R11-4: find reactions, bending diagrams, and torque.
+\item At critical section:
+\[M_R=\sqrt{M_x^2+M_z^2}\]
+\item Stresses:
+\[\sigma={32M_R\over\pi d^3},\qquad \tau={16T\over\pi d^3}\]
+\item Maximum shear stress theory:
+\[\tau_{max}=\sqrt{\left({\sigma\over2}\right)^2+\tau^2}\le80\,\mathrm{MPa}\]
+\item Equivalent compact diameter equation:
+\[\boxed{d=\left[{16\over\pi\tau_{allow}}\sqrt{M_R^2+T^2}\right]^{1/3}}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 11-43: Gear torque and shaft sizing}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/11-43.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Isolate end gear and use moment equilibrium to find transmitted torque $T=F_t r$.
+\item Use whole-shaft FBD to find bearing reactions in $y$ and $z$.
+\item Draw bending moment diagrams in two planes.
+\item Determine critical $M_R=\sqrt{M_y^2+M_z^2}$.
+\item Use distortion-energy criterion:
+\[\sqrt{\left({32M_R\over\pi d^3}\right)^2+3\left({16T\over\pi d^3}\right)^2}\le80\,\mathrm{MPa}\]
+\item Solve for smallest $d$ and round up.
+\end{enumerate}
+\clearpage
+\section*{Problem 11-30: Maximum load on steel beam}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/11-30.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw beam FBD and solve support reactions in terms of $P$.
+\item Draw shear-force diagram and find $V_{max}$.
+\item Draw bending-moment diagram and find $M_{max}$.
+\item Section checks:
+\[\sigma_{max}={M_{max}c\over I}\le140\,\mathrm{MPa}\]
+\[\tau_{max}={V_{max}Q\over It}\le90\,\mathrm{MPa}\]
+\item Compute $P$ from both inequalities; choose the smaller value.
+\[\boxed{P_{safe}=\min(P_{bending},P_{shear})}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 11-20: Minimum wall thickness of hollow shaft}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/11-20.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw shaft FBD. Thrust bearing at $A$ and journal bearing at $B$ give reactions.
+\item Determine maximum bending moment from overhung load $P=5\,\mathrm{kN}$.
+\item Outer radius $r_o=40\,\mathrm{mm}$, inner radius $r_i=r_o-t$.
+\[I={\pi(r_o^4-r_i^4)\over4},\qquad J={\pi(r_o^4-r_i^4)\over2}\]
+\item Normal stress check:
+\[\sigma={Mc\over I}\le150\,\mathrm{MPa}\]
+\item Shear/torsion check:
+\[\tau={Tc\over J}\le85\,\mathrm{MPa}\]
+\item Increase $t$ until both are satisfied; round up to nearest millimeter.
+\end{enumerate}
+\clearpage
+\section*{Problem 10-87: Maximum torque in stepped shaft}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/10-87.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item A-36 steel, use yielding with $FS=1.5$.
+\item Pure torsion gives von Mises stress $\sigma_{VM}=\sqrt3\tau$.
+\item Allowable shear:
+\[\tau_{allow}={S_y\over\sqrt3 FS}\]
+\item Solid segment:
+\[T_s={\tau_{allow}J_s\over c_s},\quad J_s={\pi d^4\over32}\]
+\item Hollow segment:
+\[T_h={\tau_{allow}J_h\over c_h},\quad J_h={\pi(d_o^4-d_i^4)\over32}\]
+\item Result:
+\[\boxed{T_{max}=\min(T_s,T_h)}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 10-73\_74: Crash stress state - Tresca and von Mises}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/10-73_74.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Read stress state: $\sigma_x=560\,\mathrm{MPa}$, $\sigma_y=0$, $\tau_{xy}=175\,\mathrm{MPa}$.
+\item Mohr circle:
+\[\sigma_{avg}=280\,\mathrm{MPa}\]
+\[R=\sqrt{280^2+175^2}=330.14\,\mathrm{MPa}\]
+\[\sigma_1=610.14\,\mathrm{MPa},\quad \sigma_2=-50.14\,\mathrm{MPa}\]
+\item 10-73, maximum shear stress theory:
+\[S_y\ge\sigma_1-\sigma_2=660.28\,\mathrm{MPa}\]
+\[\boxed{S_y\approx661\,\mathrm{MPa}}\]
+\item 10-74, distortion energy theory:
+\[\sigma_{VM}=\sqrt{560^2+3(175)^2}=637.17\,\mathrm{MPa}\]
+\[\boxed{S_y\approx638\,\mathrm{MPa}}\]
+\end{enumerate}
+\includegraphics[width=.5\textwidth]{final_step_drawings/mohr_template.png}
+\clearpage
+\section*{Problem 10-69: Concrete cylinder under compression and torque}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/10-69.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item $d=50\,\mathrm{mm}$, $T=500\,\mathrm{N\,m}=500000\,\mathrm{N\,mm}$, $P=2\,\mathrm{kN}$ compression.
+\item $A=\pi d^2/4$, $J=\pi d^4/32$.
+\item Axial stress:
+\[\sigma=-{P\over A}=-1.019\,\mathrm{MPa}\]
+\item Torsional shear:
+\[\tau={Tc\over J}=20.372\,\mathrm{MPa}\]
+\item Principal stresses:
+\[\sigma_1=19.869\,\mathrm{MPa},\quad \sigma_2=-20.887\,\mathrm{MPa}\]
+\item Maximum normal stress theory for brittle concrete:
+\[\max|\sigma_i|=20.887<28\,\mathrm{MPa}\]
+\[\boxed{\text{No failure by maximum normal stress theory.}}\]
+\end{enumerate}
+\includegraphics[width=.58\textwidth]{final_graphic_solutions/10-69_mohr.png}
+\clearpage
+\section*{Problem 10-58: Apparent stiffness of laterally constrained material}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/10-58.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Constraints: $\epsilon_x=0$, $\epsilon_y=0$.
+\item For isotropic material:
+\[\epsilon_x={1\over E}[\sigma_x-\nu(\sigma_y+\sigma_z)]=0\]
+\[\epsilon_y={1\over E}[\sigma_y-\nu(\sigma_x+\sigma_z)]=0\]
+\item Symmetry gives $\sigma_x=\sigma_y=\nu\sigma_z/(1-\nu)$.
+\item Axial strain:
+\[\epsilon_z={\sigma_z\over E}{(1+
+u)(1-2
+u)\over(1-
+u)}\]
+\item Apparent modulus:
+\[\boxed{{E_{app}\over E}={1-
+u\over(1+
+u)(1-2
+u)}}\]
+\item For $\nu=0.3$:
+\[\boxed{E_{app}/E=1.346}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 10-56\_57: Thin-walled pressure vessel}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/10-56_57.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Hoop and longitudinal stresses:
+\[\sigma_h={pr\over t},\qquad \sigma_l={pr\over2t}\]
+\item Given $p=15\,\mathrm{MPa}$, $r=0.5\,\mathrm{m}$, $t=10\,\mathrm{mm}$:
+\[\sigma_h=750\,\mathrm{MPa},\quad \sigma_l=375\,\mathrm{MPa}\]
+\item Plane stress strains:
+\[\epsilon_h={\sigma_h-
+u\sigma_l\over E}=0.0031875\]
+\[\epsilon_l={\sigma_l-
+u\sigma_h\over E}=0.000750\]
+\item Diameter and length increases:
+\[\boxed{\Delta D=3.1875\,\mathrm{mm}},\qquad \boxed{\Delta L=2.25\,\mathrm{mm}}\]
+\item Volume increase:
+\[{\Delta V\over V}\approx2\epsilon_h+\epsilon_l=0.007125\]
+\[V=\pi(0.5)^2(3)=2.356\,\mathrm{m^3}\]
+\[\boxed{\Delta V=0.0168\,\mathrm{m^3}}\]
+\end{enumerate}
+\includegraphics[width=.78\textwidth]{final_graphic_solutions/10-56_pressure_vessel.png}
+\clearpage
+\section*{Problem 10-41: Thermal expansion in rigid cavity}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/10-41.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Use generalized Hooke's law with thermal strain:
+\[\epsilon_i={1\over E}[\sigma_i-\nu(\sigma_j+\sigma_k)]+\alpha\Delta T\]
+\item Smooth rigid cavity prevents horizontal strains:
+\[\epsilon_x=0,
+\quad \epsilon_y=0\]
+\item Top is open. First check free vertical expansion:
+\[\Delta z_{free}=\alpha\Delta T(150\,\mathrm{mm})\]
+\item If $\Delta z_{free}<0.3\,\mathrm{mm}$, then $\sigma_z=0$ and solve only lateral constraints.
+\item If $\Delta z_{free}>0.3\,\mathrm{mm}$, then contact occurs and:
+\[\epsilon_z={0.3\over150}=0.002\]
+\item Solve the three strain equations for $\sigma_x,\sigma_y,\sigma_z$ and report $\epsilon_x,\epsilon_y,\epsilon_z$.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-88: Bracket section a-a principal stress}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-88.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Resolve the 2.5-kN cable force using the 3-4-5 triangle.
+\item Take a cut at section $a-a$ and find internal $N,V,M$.
+\item Compute section properties of the built-up section using composite areas.
+\item At point $A$:
+\[\sigma={N\over A}\pm{Mc\over I}\]
+\[\tau={VQ\over It}\]
+\item Use Mohr circle to obtain principal stresses and absolute maximum shear.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-85: Solid shaft with torque, bending, and shear}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-85.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item At the section through $A$ and $B$, determine internal loads: $V=800\,\mathrm{N}$, bending moment from the 450-mm arm, and applied torque(s).
+\item For the solid circular shaft:
+\[I={\pi r^4\over4},\qquad J={\pi r^4\over2}\]
+\item At surface point $A$ or $B$:
+\[\sigma={Mc\over I}\]
+\[\tau_T={Tc\over J}\]
+\item Transverse shear due to $V$ is zero at the outside surface of a circular shaft.
+\item Use Mohr circle for $\sigma_1,\sigma_2,\tau_{max}$.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-74\_75: Wood grain stress and principal stress}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-74_75.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw frame FBD and find reactions at the supports.
+\item Cut just left of the 10-kN force at point $D$.
+\item Compute $N,V,M$ at the cut.
+\item At $D$:
+\[\sigma_x={N\over A}-{My\over I},\qquad \tau_{xy}={VQ\over It}\]
+\item Stress along grain at $\theta=30^\circ$:
+\[\sigma_{\theta}={\sigma_x+\sigma_y\over2}+{\sigma_x-\sigma_y\over2}\cos2\theta+\tau_{xy}\sin2\theta\]
+\[\tau_{\theta}=-{\sigma_x-\sigma_y\over2}\sin2\theta+\tau_{xy}\cos2\theta\]
+\item Principal stresses use Mohr circle with the same $\sigma_x,\tau_{xy}$.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-66: Curved rod point A}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-66.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Replace the pair of 450-N forces by their resultant internal force system at section through $A$.
+\item Determine axial force, bending moment, and torque at the section.
+\item For $d=40\,\mathrm{mm}$:
+\[A={\pi d^2\over4},\quad I={\pi d^4\over64},\quad J={\pi d^4\over32}\]
+\item At point $A$:
+\[\sigma={N\over A}\pm{Mc\over I},\qquad \tau={Tc\over J}\]
+\item Use Mohr circle to show the result on a stress element.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-63: Helicopter rotor shaft}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-63.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Given $d=150\,\mathrm{mm}$, $P=225\,\mathrm{kN}$, $T=15\,\mathrm{kN\,m}$.
+\item Area: $A=\pi d^2/4=17671.5\,\mathrm{mm^2}$.
+\item Axial stress:
+\[\sigma={P\over A}=12.732\,\mathrm{MPa}\]
+\item Torsional shear:
+\[\tau={Tc\over J}=22.635\,\mathrm{MPa}\]
+\item Mohr circle:
+\[\sigma_1=29.880\,\mathrm{MPa},\quad \sigma_2=-17.147\,\mathrm{MPa}\]
+\[\boxed{\tau_{max}=23.514\,\mathrm{MPa}}\]
+\end{enumerate}
+\includegraphics[width=.58\textwidth]{final_graphic_solutions/9-63_mohr.png}
+\clearpage
+\section*{Problem 9-38\_39: Solid shaft points A and B}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-38_39.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Cut the shaft at the section containing points $A$ and $B$.
+\item Determine internal $V$, $M$, and $T$ from the external 800-N load and applied torques.
+\item At the outer surface:
+\[\sigma={Mc\over I},\qquad \tau={Tc\over J}\]
+\item Sign of $\sigma$ changes between $A$ and $B$ depending on whether the point is in tension or compression.
+\item For each point, draw Mohr circle and calculate:
+\[\sigma_{1,2}={\sigma_{avg}}\pm R,
+\quad R=\sqrt{(\sigma/2)^2+	au^2}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 9-37: General shaft with axial load and bending}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-37.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Bearings provide vertical reactions only. Use beam equilibrium to find reactions due to central load $P$.
+\item Axial compressive loads $F$ add uniform normal stress:
+\[\sigma_N=-{F\over A}\]
+\item Bending at midpoint:
+\[M={PL\over4}\]
+\item At point $A$:
+\[\sigma_x=-{F\over A}\pm{Mc\over I}\]
+\item If torque is absent, $\tau=0$ and the principal stresses are simply $\sigma_x$ and 0.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-34\_35: Arm section a-a principal and shear stress}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-34_35.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw arm FBD. Resolve the cable force using the given $60^\circ$ geometry.
+\item Use moment equilibrium about the pin to find cable tension.
+\item Cut at section $a-a$ and find internal $N,V,M$.
+\item Use section properties for the I-shaped cross section.
+\item At point $A$:
+\[\sigma={N\over A}\pm{Mc\over I}\]
+\[\tau={VQ\over It}\]
+\item 9-34 asks principal stress; 9-35 asks maximum in-plane shear. Use Mohr circle.
+\end{enumerate}
+\clearpage
+\section*{Problem 9-30: Rectangular beam points A and B}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/9-30.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw FBD and solve reactions for the 20-kN vertical load and 10-kN axial load.
+\item Cut just left of the 20-kN load.
+\item Determine internal $N,V,M$.
+\item Rectangular section:
+\[A=bh,
+\quad I={bh^3\over12}\]
+\item At $A$ and $B$:
+\[\sigma_x={N\over A}-{My\over I}\]
+\[\tau_{xy}={VQ\over It}\]
+\item Use Mohr circle for each point.
+\end{enumerate}
+\clearpage
+\section*{Problem 8-68\_69: Circular bar points A and B}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/8-68_69.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Cut the circular bar at the section through $A,B$.
+\item Resolve the 1200-N and 800-N forces into axial/transverse components.
+\item Determine $N,V,M,T$ at the section.
+\item For $d=40\,\mathrm{mm}$:
+\[A={\pi d^2\over4},\quad I={\pi d^4\over64},\quad J={\pi d^4\over32}\]
+\item At point $A$ or $B$:
+\[\sigma={N\over A}\pm{Mc\over I}\]
+\[\tau={Tc\over J}\]
+\item Show the stress element with correct signs.
+\end{enumerate}
+\clearpage
+\section*{Problem R8-3: Wood frame stress at point F}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/R8-3.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Replace 20-kg drum by weight:
+\[W=mg=20(9.81)=196.2\,\mathrm{N}\]
+\item Draw frame FBD and find force in the diagonal/support members.
+\item Cut at section $b-b$.
+\item Determine internal $N,V,M$ at the cut.
+\item Rectangular section:
+\[A=75(75),\qquad I={bh^3\over12}\]
+\item At point $F$:
+\[\sigma={N\over A}\pm{Mc\over I}\]
+\[\tau={VQ\over It}\]
+\item Draw the resulting stress element.
+\end{enumerate}
+\clearpage
+\section*{Problem 8-49: Solid rod state of stress at point C}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/8-49.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Cut at the section containing point $C$.
+\item External loads give axial force, bending moment, transverse shear, and torque.
+\item Circular section properties:
+\[A=\pi r^2,
+\quad I={\pi r^4\over4},
+\quad J={\pi r^4\over2}\]
+\item At outer point $C$, transverse shear from $V$ is zero; torsional shear is maximum.
+\item Compute:
+\[\sigma={N\over A}\pm{Mc\over I},\qquad \tau={Tc\over J}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 8-31\_32: Drill bit stress at A and B}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/8-31_32.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Resolve the 150-N hand force using the 3-4-5 direction triangle.
+\item Determine torque at drill bit: applied $20\,\mathrm{N\,m}$ plus any force moment about the bit axis if applicable.
+\item At section $a-a$, compute $N,V,M,T$.
+\item Drill radius is $5\,\mathrm{mm}$.
+\[A=\pi r^2,
+\quad I={\pi r^4\over4},
+\quad J={\pi r^4\over2}\]
+\item Point $A$ and $B$ differ by location on the circular cross section, so bending stress sign changes.
+\end{enumerate}
+\clearpage
+\section*{Problem 7-26: Maximum load by allowable shear stress}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/7-26.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Draw FBD and solve reactions:
+\[R_B(1.8)-P(0.6)-2P(1.2)=0\Rightarrow R_B={5P\over3}\]
+\[R_A=3P-R_B={4P\over3}\]
+\item Maximum shear force:
+\[V_{max}={5P\over3}\]
+\item Rectangular section area:
+\[A=50(100)=5000\,\mathrm{mm^2}\]
+\item For rectangle:
+\[\tau_{max}=1.5{V\over A}\]
+\item Set $\tau_{allow}=3\,\mathrm{MPa}$:
+\[3=1.5{(5P/3)\over5000}\]
+\[\boxed{P_{max}=6.0\,\mathrm{kN}}\]
+\end{enumerate}
+\includegraphics[width=.7\textwidth]{final_step_drawings/7-26_fbd.png}
+\includegraphics[width=.8\textwidth]{final_graphic_solutions/7-26_shear_moment.png}
+\clearpage
+\section*{Problem 7-25: Cantilever length for equal bending and shear stress}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/7-25.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Maximum bending moment at fixed end: $M=PL$.
+\item Rectangular section:
+\[I={bh^3\over12},\quad c={h\over2}\]
+\item Bending stress:
+\[\sigma_{max}={Mc\over I}={6PL\over bh^2}\]
+\item Maximum shear stress:
+\[\tau_{max}=1.5{P\over bh}\]
+\item Set equal:
+\[{6PL\over bh^2}=1.5{P\over bh}\]
+\[\boxed{L={h\over4}}\]
+\end{enumerate}
+\clearpage
+\section*{Problem 7-22: I-section web shear stress at A and B}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/7-22.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item Use the beam shear formula:
+\[\tau={VQ\over It}\]
+\item Given $V=15\,\mathrm{kN}$, $w=125\,\mathrm{mm}$, $I_{NA}=0.2182(10^{-3})\,\mathrm{m^4}$.
+\item At point $A$, compute $Q_A$ using area above the horizontal cut through $A$.
+\item At point $B$, compute $Q_B$ using area above/below the cut through $B$.
+\item Divide by the web thickness $t_{web}$ at the point.
+\item Draw shear stress components on volume elements at $A$ and $B$.
+\end{enumerate}
+\clearpage
+\section*{Problem 7-18: Circular rod shear-stress distribution}
+\textbf{Original question visual:}\par
+\includegraphics[width=0.92\textwidth]{final_question_crops/7-18.png}
+
+\textbf{Step-by-step solution:}\par
+\begin{enumerate}
+\item For a circular section under transverse shear $V$:
+\[\tau(y)={4V\over3A}\left(1-{y^2\over c^2}\right)\]
+\item Maximum occurs at neutral axis $y=0$:
+\[\tau_{max}={4V\over3A}\]
+\item Average shear:
+\[\tau_{avg}={V\over A}\]
+\item Ratio:
+\[\boxed{\tau_{max}/\tau_{avg}=4/3}\]
+\end{enumerate}
+\includegraphics[width=.65\textwidth]{final_graphic_solutions/7-18_shear_distribution.png}
+\end{document}

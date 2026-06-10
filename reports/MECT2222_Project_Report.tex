@@ -1,0 +1,445 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{longtable}
+
+\newcommand{\toprule}{\hline}
+\newcommand{\midrule}{\hline}
+\newcommand{\bottomrule}{\hline}
+\newcommand{\SI}[2]{#1\,\ensuremath{\mathrm{#2}}}
+\newcommand{\si}[1]{\ensuremath{\mathrm{#1}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\title{\textbf{MECT2222 Term Project Report}\\Combined Loading Analysis and FEA Validation}
+\author{
+Student Name: \underline{\hspace{6cm}}\\
+Student ID: \underline{\hspace{6cm}}\\
+Assigned Problem: Cantilever circular shaft under combined axial and transverse loading
+}
+\date{10 June 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction and Assumptions}
+
+This report analyzes a solid circular shaft subjected to combined axial and transverse loading. The objective is to determine the critical internal loads, stress state, principal stresses, failure-theory equivalent stresses, and factor of safety by analytical mechanics, then compare the results with a finite element model prepared in FreeCAD/CalculiX.
+
+The analyzed member is a solid cylindrical cantilever shaft fixed at the left end. The shaft axis is the global \(x\)-axis.
+
+\subsection{Geometry}
+
+\begin{table}[htbp]
+\centering
+\caption{Assumed shaft geometry}
+\begin{tabular}{lll}
+\toprule
+Parameter & Symbol & Value \\
+\midrule
+Shaft length & \(L\) & \SI{600}{mm} \\
+Radius & \(r\) & \SI{30}{mm} \\
+Diameter & \(d\) & \SI{60}{mm} \\
+Middle transverse load location & \(a\) & \SI{400}{mm} from fixed end \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\fbox{\parbox{0.9\textwidth}{\textbf{Assumed dimension:} The shaft is assumed to be a solid circular cylinder with diameter \(d=\SI{60}{mm}\).}}
+
+Section properties:
+\begin{align}
+A &= \pi r^2 = \pi(30)^2 = \SI{2827.43}{mm^2} \\
+I_y = I_z &= \frac{\pi r^4}{4} = \frac{\pi(30)^4}{4} = \SI{636172.51}{mm^4} \\
+J &= \frac{\pi r^4}{2} = \SI{1272345.02}{mm^4}
+\end{align}
+
+\subsection{Material}
+
+The selected material is \textbf{Aluminium 6061-T6}. This material is ductile, so the Von Mises and Tresca criteria are used.
+
+\begin{table}[htbp]
+\centering
+\caption{Material properties of Aluminium 6061-T6}
+\begin{tabular}{lll}
+\toprule
+Property & Symbol & Value \\
+\midrule
+Young's modulus & \(E\) & \SI{68900}{MPa} \\
+Poisson's ratio & \(\nu\) & 0.33 \\
+Density & \(\rho\) & \SI{2700}{kg/m^3} \\
+Yield strength & \(S_y\) & \SI{276}{MPa} \\
+Ductility class & -- & Ductile \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Loading}
+
+\begin{table}[htbp]
+\centering
+\caption{Applied loads}
+\begin{tabular}{llll}
+\toprule
+Load & Location & Direction & Magnitude \\
+\midrule
+Axial force & \(x=\SI{600}{mm}\) & \(+x\) & \SI{100}{kN} \\
+Vertical transverse force & \(x=\SI{600}{mm}\) & \(-y\) & \SI{10}{kN} \\
+Middle transverse force & \(x=\SI{400}{mm}\) & \(+z\) & \SI{20}{kN} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The critical section is expected at the fixed end because the bending moments are maximum at the support.
+
+\section{Analytical Solution}
+
+\subsection{Free Body Diagram and Support Reactions}
+
+The cantilever support at \(x=0\) must balance all external forces and bending moments.
+
+Force equilibrium:
+\begin{align}
+\sum F_x &= 0: & R_x + 100000 &= 0 & R_x &= \SI{-100000}{N} \\
+\sum F_y &= 0: & R_y - 10000 &= 0 & R_y &= \SI{10000}{N} \\
+\sum F_z &= 0: & R_z + 20000 &= 0 & R_z &= \SI{-20000}{N}
+\end{align}
+
+Moment equilibrium about the fixed end:
+\begin{align}
+M_z &= 10000(600) = \SI{6000000}{N.mm} \\
+M_y &= 20000(400) = \SI{8000000}{N.mm}
+\end{align}
+
+The resultant bending moment at the fixed end is:
+\begin{align}
+M_R &= \sqrt{M_y^2+M_z^2} \\
+    &= \sqrt{(8000000)^2+(6000000)^2} \\
+    &= \SI{10000000}{N.mm}
+\end{align}
+
+There is no externally applied torque about the \(x\)-axis in this idealized model:
+\begin{equation}
+T=0
+\end{equation}
+
+\subsection{Internal Loads at the Critical Section}
+
+\begin{table}[htbp]
+\centering
+\caption{Internal resultants at the fixed end}
+\begin{tabular}{ll}
+\toprule
+Internal resultant & Value \\
+\midrule
+Axial force, \(N\) & \SI{100000}{N} \\
+Shear force in \(y\), \(V_y\) & \SI{10000}{N} \\
+Shear force in \(z\), \(V_z\) & \SI{20000}{N} \\
+Bending moment about \(z\), \(M_z\) & \SI{6000000}{N.mm} \\
+Bending moment about \(y\), \(M_y\) & \SI{8000000}{N.mm} \\
+Resultant bending moment, \(M_R\) & \SI{10000000}{N.mm} \\
+Torque, \(T\) & \SI{0}{N.mm} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the \(y\)-direction load at the free end:
+\begin{align}
+V_y &= \SI{-10000}{N}, \qquad 0<x<\SI{600}{mm} \\
+M_z(x) &= 10000(600-x)\ \si{N.mm}
+\end{align}
+
+For the \(z\)-direction point load at \(x=\SI{400}{mm}\):
+\begin{align}
+V_z &= \SI{20000}{N}, \qquad 0<x<\SI{400}{mm} \\
+V_z &= 0, \qquad \SI{400}{mm}<x<\SI{600}{mm} \\
+M_y(x) &= 20000(400-x)\ \si{N.mm}, \qquad 0<x<\SI{400}{mm} \\
+M_y(x) &= 0, \qquad \SI{400}{mm}<x<\SI{600}{mm}
+\end{align}
+
+\subsection{Normal and Shear Stress}
+
+Axial normal stress:
+\begin{equation}
+\sigma_a = \frac{N}{A} = \frac{100000}{2827.43} = \SI{35.37}{MPa}
+\end{equation}
+
+Maximum bending normal stress:
+\begin{equation}
+\sigma_b = \frac{M_R c}{I} = \frac{10000000(30)}{636172.51} = \SI{471.57}{MPa}
+\end{equation}
+
+Maximum combined tensile normal stress:
+\begin{equation}
+\sigma_{\max} = \sigma_a+\sigma_b = 35.37+471.57 = \SI{506.94}{MPa}
+\end{equation}
+
+Maximum combined compressive normal stress:
+\begin{equation}
+\sigma_{\min} = \sigma_a-\sigma_b = 35.37-471.57 = \SI{-436.20}{MPa}
+\end{equation}
+
+At the outer surface point where bending stress is maximum, the transverse shear stress from \(V_y\) and \(V_z\) is zero for a circular section boundary in elementary beam theory. Since \(T=0\), the torsional shear stress is also zero:
+\begin{equation}
+\tau \approx \SI{0}{MPa}
+\end{equation}
+
+Therefore, the critical surface stress state is approximately uniaxial:
+\begin{equation}
+\sigma_x=\SI{506.94}{MPa}, \quad
+\sigma_y=0, \quad
+\sigma_z=0, \quad
+\tau_{xy}=\tau_{xz}=\tau_{yz}=0
+\end{equation}
+
+\subsection{Principal Stresses and Mohr's Circle}
+
+For the uniaxial critical stress state:
+\begin{align}
+\sigma_1 &= \SI{506.94}{MPa} \\
+\sigma_2 &= \SI{0}{MPa} \\
+\sigma_3 &= \SI{0}{MPa}
+\end{align}
+
+Maximum in-plane shear stress:
+\begin{equation}
+\tau_{\max,\text{in-plane}} = \frac{\sigma_1-\sigma_2}{2} = \SI{253.47}{MPa}
+\end{equation}
+
+Maximum out-of-plane shear stress:
+\begin{equation}
+\tau_{\max} = \frac{\sigma_1-\sigma_3}{2} = \SI{253.47}{MPa}
+\end{equation}
+
+\subsection{Failure Theories}
+
+Because 6061-T6 aluminium is ductile, both Von Mises and Tresca criteria are evaluated.
+
+Von Mises equivalent stress:
+\begin{equation}
+\sigma_{VM}=
+\sqrt{\sigma_1^2+\sigma_2^2+\sigma_3^2-\sigma_1\sigma_2-\sigma_2\sigma_3-\sigma_3\sigma_1}
+=\SI{506.94}{MPa}
+\end{equation}
+
+Tresca equivalent stress:
+\begin{equation}
+\sigma_T=\max\left(|\sigma_1-\sigma_2|,\ |\sigma_2-\sigma_3|,\ |\sigma_1-\sigma_3|\right)
+=\SI{506.94}{MPa}
+\end{equation}
+
+Analytical factor of safety:
+\begin{equation}
+n=\frac{S_y}{\sigma_{VM}}=\frac{276}{506.94}=0.54
+\end{equation}
+
+Since \(n<1\), the selected \SI{60}{mm} diameter 6061-T6 aluminium shaft is not safe under the specified loading.
+
+\section{Computational Analysis: FEA}
+
+\subsection{Model Setup}
+
+The finite element model was created using FreeCAD FEM and CalculiX. The automation script is saved as \texttt{shaft\_6061\_fem.py}, and the generated model is \texttt{shaft\_6061\_t6\_fem.FCStd}.
+
+\begin{table}[htbp]
+\centering
+\caption{FEA model properties}
+\begin{tabular}{ll}
+\toprule
+Item & Value \\
+\midrule
+Geometry & Solid circular shaft \\
+Length & \SI{600}{mm} \\
+Radius & \SI{30}{mm} \\
+Material & Aluminium 6061-T6 \\
+Fixed support & Circular face at \(x=0\) \\
+Axial load & \SI{100}{kN} at \(x=\SI{600}{mm}\) \\
+End transverse load & \SI{10}{kN} at \(x=\SI{600}{mm}\) \\
+Middle transverse load & \SI{20}{kN} at \(x=\SI{400}{mm}\) \\
+Mesh tool & Gmsh \\
+Mesh size & \SI{3}{mm} minimum, \SI{8}{mm} maximum \\
+Solver & CalculiX \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Mesh and Boundary Conditions}
+
+The mesh uses 3D solid elements. The input file contains 4041 nodes and 4048 volume elements. The mesh is refined enough for a first comparison, but additional local refinement should be applied near the fixed end because this is the maximum-stress region.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{freecad_screenshots/01_model_axometric.png}
+\caption{FreeCAD model with mesh, fixed support, and applied loads.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{freecad_screenshots/02_model_front.png}
+\centering\small Front view
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{freecad_screenshots/03_model_top.png}
+\centering\small Top view
+\end{minipage}
+\caption{Additional FreeCAD model views.}
+\end{figure}
+
+\subsection{Corrected FEA Output}
+
+The original FreeCAD force export wrote incorrect total force magnitudes into the CalculiX \texttt{*CLOAD} blocks. This was corrected by normalizing each load block in \texttt{Gmsh\_Mesh\_3mm\_8mm\_corrected.inp} so that the total applied forces are exactly \SI{100}{kN}, \SI{-10}{kN}, and \SI{20}{kN}. The corrected model was solved directly with \texttt{ccx}. The extracted result summary is saved in \texttt{shaft\_6061\_fem\_output/extracted\_fea\_values\_corrected.txt}.
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected FEA result values}
+\begin{tabular}{ll}
+\toprule
+Quantity & Extracted FEA value \\
+\midrule
+Maximum displacement magnitude & \SI{22.3217}{mm} \\
+Node of maximum displacement & 113 \\
+Coordinate of maximum displacement & \(x=\SI{600.0}{mm}, y=\SI{21.2132}{mm}, z=\SI{-21.2132}{mm}\) \\
+Maximum Von Mises stress & \SI{448.052}{MPa} \\
+Node of maximum Von Mises stress & 790 \\
+Coordinate of maximum Von Mises stress & \(x=\SI{28.4394}{mm}, y=\SI{18.4220}{mm}, z=\SI{-23.6776}{mm}\) \\
+Maximum principal stress, \(\sigma_1\) & \SI{640.058}{MPa} \\
+Minimum principal stress, \(\sigma_3\) & \SI{-544.853}{MPa} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected CalculiX reaction output}
+\begin{tabular}{lll}
+\toprule
+Quantity & FEA output & Analytical value \\
+\midrule
+Total reaction \(F_x\) & \SI{-100000}{N} & \SI{-100000}{N} \\
+Total reaction \(F_y\) & \SI{10000}{N} & \SI{10000}{N} \\
+Total reaction \(F_z\) & \SI{-20000}{N} & \SI{-20000}{N} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+After correction, the reaction forces match the analytical support reactions exactly. Therefore, the corrected CalculiX result is suitable for comparison with the hand calculation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{freecad_screenshots/04_corrected_von_mises.png}
+\caption{Corrected FEA Von Mises stress contour.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{freecad_screenshots/05_corrected_principal_sigma1.png}
+\centering\small Principal stress \(\sigma_1\)
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{freecad_screenshots/06_corrected_principal_sigma3.png}
+\centering\small Principal stress \(\sigma_3\)
+\end{minipage}
+\caption{Corrected FEA principal stress contours.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{freecad_screenshots/07_corrected_displacement.png}
+\caption{Corrected FEA displacement magnitude contour.}
+\end{figure}
+
+\section{Results Comparison and Factor of Safety}
+
+The comparison below uses the corrected CalculiX input file. The FEA stress value selected for comparison is the maximum Von Mises stress away from the immediate fixed-face singularity. The fixed face itself shows a higher local principal stress because the ideal clamped boundary creates a stress concentration.
+
+\begin{table}[htbp]
+\centering
+\caption{Analytical and FEA comparison}
+\begin{tabular}{llll}
+\toprule
+Result & Analytical & FEA & Percent error \\
+\midrule
+\(R_x\) & \SI{-100000}{N} & \SI{-100000}{N} & 0.00\% \\
+\(R_y\) & \SI{10000}{N} & \SI{10000}{N} & 0.00\% \\
+\(R_z\) & \SI{-20000}{N} & \SI{-20000}{N} & 0.00\% \\
+Resultant bending moment & \SI{10000000}{N.mm} & Implied by reactions & -- \\
+\(\sigma_1\) / nominal max stress & \SI{506.94}{MPa} & \SI{459.80}{MPa} at max-VM node & 9.30\% \\
+Von Mises stress & \SI{506.94}{MPa} & \SI{448.05}{MPa} & 11.62\% \\
+Tresca stress & \SI{506.94}{MPa} & \SI{457.35}{MPa} & 9.78\% \\
+Factor of safety & 0.54 & 0.62 & 13.14\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The analytical and FEA stresses are close in order of magnitude. The difference is mainly due to the 3D solid model, discrete load application over faces, stress averaging at nodes, and local boundary effects near the clamped face.
+
+\section{Technical Discussion}
+
+The analytical solution predicts that the maximum stress occurs at the fixed end. This is expected for a cantilever beam because both transverse loads produce their largest bending moments at the built-in support. The axial force adds a uniform normal stress to the bending normal stress. At the critical outer surface point, the bending and axial stresses act in the same direction, giving a maximum tensile stress of \SI{506.94}{MPa}.
+
+The selected material, 6061-T6 aluminium, has a yield strength of approximately \SI{276}{MPa}. The analytical Von Mises and Tresca stresses are both \SI{506.94}{MPa} because the critical stress state is approximately uniaxial. This gives a factor of safety of 0.54, which is below 1.0. Therefore, yielding is expected, and the material/geometry combination is not acceptable for the assigned loading.
+
+A safer design would require either a stronger material or a larger shaft diameter. Since bending stress varies with \(1/d^3\) for a solid circular shaft, increasing diameter is very effective. For example, keeping the same material and targeting \(n=2\) would require the maximum equivalent stress to be less than \SI{138}{MPa}, so the diameter would need to be increased substantially.
+
+The analytical model is based on classical beam theory. It assumes linear elastic behavior, small deflection, plane sections remaining plane, ideal point/resultant loads, and an ideal fixed support. It also neglects local 3D stress concentration near the load application regions and the fixed boundary. These assumptions are acceptable for estimating nominal stresses away from discontinuities, but they cannot capture local peaks caused by load patches, fixture edges, or mesh geometry.
+
+FEA solves the 3D elasticity problem over the entire volume, so it can show stress gradients and local concentrations that are not present in the hand calculation. The first FreeCAD export wrote incorrect total concentrated-load magnitudes, so the \texttt{*CLOAD} blocks were normalized and the corrected input was solved again in CalculiX. The corrected reaction forces match the analytical reactions exactly, confirming that the load equilibrium is now correct.
+
+Mesh density also affects the comparison. A coarse mesh can underpredict bending stress because the stress gradient across the section is not represented accurately. Near a fixed support, very fine meshes may produce increasing local peak stress due to the idealized boundary condition. For comparison with beam theory, the best practice is to probe stresses slightly away from the fixed face, at a distance where Saint-Venant effects have decayed, while still close enough to represent the critical section.
+
+\section{Conclusion}
+
+The analytical combined-loading calculation gives a maximum tensile normal stress and Von Mises stress of \SI{506.94}{MPa} at the fixed-end outer surface. For 6061-T6 aluminium with \(S_y=\SI{276}{MPa}\), the factor of safety is:
+\begin{equation}
+n=0.54
+\end{equation}
+
+Thus, the current design is \textbf{not structurally safe} under the assigned loading. The shaft should be redesigned using a larger diameter and/or a higher-strength material.
+
+The corrected FEA solution gives a maximum nominal Von Mises stress of \SI{448.05}{MPa} and a corresponding FEA factor of safety of 0.62. Both analytical and FEA results show that the current shaft is unsafe.
+
+\appendix
+\section{Files Used}
+
+\begin{longtable}{p{0.48\textwidth}p{0.42\textwidth}}
+\caption{Project files}\\
+\toprule
+File & Purpose \\
+\midrule
+\endfirsthead
+\toprule
+File & Purpose \\
+\midrule
+\endhead
+\texttt{MECT2222\_Project.pdf} & Project instructions and rubric \\
+\texttt{MECT2222\_Project Assignment Sheet.pdf} & Assignment sheet \\
+\texttt{shaft\_6061\_fem.py} & FreeCAD FEM automation script \\
+\texttt{shaft\_6061\_t6\_fem.FCStd} & Generated FreeCAD model \\
+\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm.inp} & Original CalculiX input file \\
+\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm.dat} & Original reaction-force output \\
+\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm.frd} & Original FEA result file \\
+\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm\_corrected.inp} & Corrected CalculiX input file \\
+\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm\_corrected.dat} & Corrected reaction-force output \\
+\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm\_corrected.frd} & Corrected FEA result file \\
+\texttt{freecad\_screenshots/*.png} & FreeCAD screenshots and corrected result plots \\
+\bottomrule
+\end{longtable}
+
+\end{document}
