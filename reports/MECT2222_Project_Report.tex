@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 
-\usepackage[margin=25mm]{geometry}
+\usepackage[margin=20mm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{array}
@@ -14,12 +14,17 @@
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{3em}
+\sloppy
+\newcommand{\reportimage}[1]{\includegraphics[width=0.88\textwidth,height=0.34\textheight,keepaspectratio]{#1}}
+\newcommand{\twopanelimage}[1]{\includegraphics[width=\textwidth,height=0.24\textheight,keepaspectratio]{#1}}
 
 \title{\textbf{MECT2222 Term Project Report}\\Combined Loading Analysis and FEA Validation}
 \author{
 Student Name: \underline{\hspace{6cm}}\\
 Student ID: \underline{\hspace{6cm}}\\
-Assigned Problem: Cantilever circular shaft under combined axial and transverse loading
+Assigned Problem: Cantilever circular shaft\\
+under combined axial and transverse loading
 }
 \date{10 June 2026}
 
@@ -278,7 +283,7 @@ The mesh uses 3D solid elements. The input file contains 4041 nodes and 4048 vol
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{freecad_screenshots/01_model_axometric.png}
+\reportimage{freecad_screenshots/01_model_axometric.png}
 \caption{FreeCAD model with mesh, fixed support, and applied loads.}
 \end{figure}
 
@@ -286,13 +291,13 @@ The mesh uses 3D solid elements. The input file contains 4041 nodes and 4048 vol
 \centering
 \begin{minipage}{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{freecad_screenshots/02_model_front.png}
+\twopanelimage{freecad_screenshots/02_model_front.png}
 \centering\small Front view
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{freecad_screenshots/03_model_top.png}
+\twopanelimage{freecad_screenshots/03_model_top.png}
 \centering\small Top view
 \end{minipage}
 \caption{Additional FreeCAD model views.}
@@ -305,7 +310,8 @@ The original FreeCAD force export wrote incorrect total force magnitudes into th
 \begin{table}[htbp]
 \centering
 \caption{Corrected FEA result values}
-\begin{tabular}{ll}
+\small
+\begin{tabular}{p{0.40\textwidth}p{0.50\textwidth}}
 \toprule
 Quantity & Extracted FEA value \\
 \midrule
@@ -339,7 +345,7 @@ After correction, the reaction forces match the analytical support reactions exa
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{freecad_screenshots/04_corrected_von_mises.png}
+\reportimage{freecad_screenshots/04_corrected_von_mises.png}
 \caption{Corrected FEA Von Mises stress contour.}
 \end{figure}
 
@@ -347,13 +353,13 @@ After correction, the reaction forces match the analytical support reactions exa
 \centering
 \begin{minipage}{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{freecad_screenshots/05_corrected_principal_sigma1.png}
+\twopanelimage{freecad_screenshots/05_corrected_principal_sigma1.png}
 \centering\small Principal stress \(\sigma_1\)
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{freecad_screenshots/06_corrected_principal_sigma3.png}
+\twopanelimage{freecad_screenshots/06_corrected_principal_sigma3.png}
 \centering\small Principal stress \(\sigma_3\)
 \end{minipage}
 \caption{Corrected FEA principal stress contours.}
@@ -361,7 +367,7 @@ After correction, the reaction forces match the analytical support reactions exa
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{freecad_screenshots/07_corrected_displacement.png}
+\reportimage{freecad_screenshots/07_corrected_displacement.png}
 \caption{Corrected FEA displacement magnitude contour.}
 \end{figure}
 
@@ -372,7 +378,8 @@ The comparison below uses the corrected CalculiX input file. The FEA stress valu
 \begin{table}[htbp]
 \centering
 \caption{Analytical and FEA comparison}
-\begin{tabular}{llll}
+\small
+\begin{tabular}{p{0.30\textwidth}p{0.20\textwidth}p{0.25\textwidth}p{0.13\textwidth}}
 \toprule
 Result & Analytical & FEA & Percent error \\
 \midrule
@@ -418,7 +425,7 @@ The corrected FEA solution gives a maximum nominal Von Mises stress of \SI{448.0
 \appendix
 \section{Files Used}
 
-\begin{longtable}{p{0.48\textwidth}p{0.42\textwidth}}
+\begin{longtable}{p{0.34\textwidth}p{0.56\textwidth}}
 \caption{Project files}\\
 \toprule
 File & Purpose \\
@@ -428,17 +435,13 @@ File & Purpose \\
 File & Purpose \\
 \midrule
 \endhead
-\texttt{MECT2222\_Project.pdf} & Project instructions and rubric \\
-\texttt{MECT2222\_Project Assignment Sheet.pdf} & Assignment sheet \\
+\texttt{MECT2222 Project} & Project instructions and assignment sheet PDFs \\
 \texttt{shaft\_6061\_fem.py} & FreeCAD FEM automation script \\
 \texttt{shaft\_6061\_t6\_fem.FCStd} & Generated FreeCAD model \\
-\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm.inp} & Original CalculiX input file \\
-\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm.dat} & Original reaction-force output \\
-\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm.frd} & Original FEA result file \\
-\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm\_corrected.inp} & Corrected CalculiX input file \\
-\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm\_corrected.dat} & Corrected reaction-force output \\
-\texttt{shaft\_6061\_fem\_output/Gmsh\_Mesh\_3mm\_8mm\_corrected.frd} & Corrected FEA result file \\
-\texttt{freecad\_screenshots/*.png} & FreeCAD screenshots and corrected result plots \\
+\texttt{original .inp/.dat/.frd} & Original CalculiX input, reaction output, and result files \\
+\texttt{corrected .inp/.dat/.frd} & Corrected CalculiX files after force normalization \\
+\texttt{extracted values} & Parsed displacement, stress, principal stress, and reaction data \\
+\texttt{screenshots} & FreeCAD mesh, boundary-condition, and corrected result plots \\
 \bottomrule
 \end{longtable}
 
